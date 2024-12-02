@@ -8,9 +8,11 @@ const Home = () => {
   const [searchedResults, setSearchedResults] = useState(null);
   const [searchTimeout, setSearchTimeout] = useState(null);
 
+  const BASE_URL = process.env.REACT_APP_BASE_API_URL;
+
   async function fetchPosts() {
     try {
-      const apiRes = await fetch("http://localhost:8080/api/v1/post");
+      const apiRes = await fetch(`${BASE_URL}/v1/post`);
       const resData = await apiRes.json();
       if (resData.success) {
         setAllPosts(resData.data.reverse());
@@ -73,7 +75,9 @@ const Home = () => {
             {searchText && (
               <h2 className="font-medium text-[#666e75] text-lg mb-3">
                 Showing results for{" "}
-                <span className="text-[#222328] text-xl font-semibold">{searchText}</span>
+                <span className="text-[#222328] text-xl font-semibold">
+                  {searchText}
+                </span>
               </h2>
             )}
             <div className="grid lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1 gap-3">

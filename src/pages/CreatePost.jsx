@@ -13,12 +13,13 @@ const CreatePost = () => {
   const [generatingImg, setGeneratingImg] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const BASE_URL = process.env.REACT_APP_BASE_API_URL
 
   async function handleSubmit(e) {
     e.preventDefault();
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:8080/api/v1/post", {
+      const response = await fetch(`${BASE_URL}/v1/post`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -45,7 +46,7 @@ const CreatePost = () => {
     if (form.prompt) {
       try {
         setGeneratingImg(true);
-        const response = await fetch("http://localhost:8080/api/v1/canvas", {
+        const response = await fetch(`${BASE_URL}/v1/canvas`, {
           method: "POST",
           headers: {
             "Content-type": "application/json",
